@@ -1,52 +1,86 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div class="input-group">
-    <div class="input-group-prepend">
-      <button class="btn btn-success" type="button">ชื่อ</button>
+<div class="container">
+  <h4>หาผลคูณ</h4>
+  <div class="row">
+    <div class="col-5">
+      <div class="input-group input-group-sm">
+        <div class="input-group-prepend">
+          <button class="btn btn-success" type="button">ค่าที่1</button>
+        </div>
+        <input type="text" class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon1"
+        [(ngModel)]="request.key1">
+      </div>
     </div>
-    <input type="text" class="form-control" [(ngModel)]="student.name" placeholder="" aria-label="" aria-describedby="basic-addon1">
+    <div class="col-5">
+      <div class="input-group input-group-sm">
+        <div class="input-group-prepend">
+          <button class="btn btn-success" type="button">ค่าที่2</button>
+        </div>
+        <input type="text" class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon1"
+        [(ngModel)]="request.key2">
+      </div>
+    </div>
+    <div class="col-2">
+        <button class="btn btn-success" (click)="getData()">คำนวณ</button>
+    </div>
   </div>
-  <span *ngIf="score>50">เกรด A</span>
-  <span *ngIf="score<50">เกรด F</span>
+  <span class="badge badge-danger">ผลลัพธ์</span>
+  {{result}}
 <hr>
-<h3 class="text-center">รายชื่อนักเรียน</h3>
-<table class="table">
-    <thead>
-      <tr>
-        <th>ID</th>
-        <th>Student Name</th>
-        <th>Weight</th>
-        <th>Height</th>
-        <th>BMI</th>
-        <th>ผลลัพธ์</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-          <td>{{student.studentId}}</td>
-        <td>{{student.name}}</td>
-        <td>{{student.weight}}</td>
-        <td>{{student.height}}</td>
-        <td>{{student.bmi}}</td>
-    <td *ngIf="student.bmi > 25">อ้วน</td>
-    <td *ngIf="student.bmi < 25">ผอม</td>
-    <td *ngIf="student.bmi == 25">สมส่วน</td>
-      </tr>
- <tr *ngFor="let s of studentList">
-    <td>{{s.studentId}}</td>
-    <td>{{s.name}}</td>
-    <td>{{s.weight}}</td>
-    <td>{{s.height}}</td>
-    <td>{{s.bmi}}</td>
-    <!-- <td *ngIf="s.weight/((s.height/100)*(s.height/100)) > 25">อ้วน</td> -->
-    <td *ngIf="s.bmi > 25">อ้วน</td>
-    <td *ngIf="s.bmi < 25">ผอม</td>
-    <td *ngIf="s.bmi == 25">สมส่วน</td>
- </tr>
-    </tbody>
-  </table>
-  
-
-  
-  <!-- สวัสดี {{name}} -->
+  <h4>ข้อมูล note</h4>
+  <div class="row">
+    <div class="col-5">
+      <div class="input-group input-group-sm">
+        <div class="input-group-prepend">
+          <button class="btn btn-success" type="button">รหัสนิสิต</button>
+        </div>
+        <input type="text" class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon1"
+        [(ngModel)]="userDetail.id">
+      </div>
+    </div>
+    <div class="col-5">
+      <div class="input-group input-group-sm">
+        <div class="input-group-prepend">
+          <button class="btn btn-success" type="button">ชื่อนิสิต</button>
+        </div>
+        <input type="text" class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon1"
+        [(ngModel)]="userDetail.name">
+      </div>
+    </div>
+ 
+  </div>
+</div>
+<hr>
+  <div class="container">
+  <ul class="list-group">
+      <!-- {{n.note_id}}{{n.list[0].detail}}  -->
+      <li class="list-group-item" *ngFor="let n of noteDetail">{{n.name}} 
+          <button style="float:right" class="btn btn-primary" (click)="selectNote(n.list)">ดูรายละเอียด</button>
+          <button style="float:right" class="btn btn-warning" (click)="editNote(n)">แก้ไขชื่อ</button>
+      </li>
+      <li class="list-group-item-success">แก้ไขชื่อ {{editNoteDetail.note_id}}<input class="form-control" name="noteName" [(ngModel)]="editNoteDetail.name" >
+        <button *ngIf="editNoteDetail.name" class="btn btn-warning" (click)="updateNoteName()">แก้ไขชื่อ</button>
+        <br>
+        
+      </li>
+    </ul>
+    <hr>
+    <h4>รายละเอียด</h4>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Priority</th>
+          <th>รายละเอียด</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let list of listDetail"
+        [ngClass]="{'bg-danger text-white':list.priority>5,
+        'bg-info':list.priority<5}">
+          <td>{{list.priority}}</td>
+          <td>{{list.detail}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 
 
