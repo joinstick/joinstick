@@ -1,9 +1,10 @@
 <h1 class="text-center">รายการสินค้า</h1>
-<table class="table">
+<table class="table text-center">
     <thead>
       <tr>
         <th>รหัสสินค้า</th>
         <th>ชื่อสินค้า</th>
+        <th>รูป</th>
         <th>ราคา</th>
         <th></th>
       </tr>
@@ -12,6 +13,7 @@
       <tr *ngFor="let p of productList">
         <td>{{p.pId}}</td>
         <td>{{p.pName}}</td>
+        <td><img src="{{p.pic}}" alt="" width="10%"></td>
         <td>{{p.pCost}}</td>
       <td>
       <button type="button" class="btn btn-outline-primary"
